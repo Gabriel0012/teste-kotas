@@ -12,7 +12,20 @@
     <span class="customizado">Customizado</span>
 
     <div class="cols">
-      <div>{{ vagas.usadas }}/{{ bagas.disponiveis }}</div>
+      <div>
+        {{ vagas.usadas }} / {{ vagas.disponiveis }}
+        <p>Vagas disponíveis</p>
+      </div>
+
+      <div>
+        {{ pormes }}
+        <p>Por mês</p>
+      </div>
+
+      <div>
+        <i class="fas fa-link"></i>
+        <p>Acesso por convite</p>
+      </div>
     </div>
   </div>
 </template>
@@ -21,6 +34,15 @@
 export default {
   name: "FamilyComponent",
   props: {},
+  data: () => {
+    return {
+      vagas: {
+        usadas: 2,
+        disponiveis: 5,
+      },
+      pormes: 'R$ 7,90'
+    };
+  },
 };
 </script>
 
@@ -41,5 +63,30 @@ export default {
   line-height: 12px;
   color: #616161;
   padding: 5px 15px;
+}
+
+.cols {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.cols div {
+  text-align: center;
+  padding: 5px 38px;
+  border-right: 1px solid #e1e1e1;
+  color: #141728;
+  font-size: 24px;
+  font-weight: bold;
+  height: 50px;
+}
+
+.cols div:last-child {
+  border: 0;
+}
+
+.cols div p {
+  font-size: 12px;
+  color: #616161;
+  font-weight: 300;
 }
 </style>

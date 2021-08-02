@@ -7,15 +7,23 @@
       </li>
       <li>
         <span>Kotas</span>
-        <span>{{ formatPrice(mensalidade) }}</span>
+        <span class="kotas">
+          {{ kotas }}
+          <button @click.stop="increase()">
+            <i class="fas fa-plus"></i>
+          </button>
+          <button @click.stop="decrease()">
+            <i class="fas fa-minus"></i>
+          </button>
+        </span>
       </li>
       <li>
         <span>Caução <i class="fas fa-info-circle"></i> </span>
-        <span>{{ formatPrice(mensalidade) }}</span>
+        <span>{{ formatPrice(caucao) }}</span>
       </li>
       <li class="total">
         <span>Total da inscrição</span>
-        <span>{{ formatPrice(mensalidade) }}</span>
+        <span>{{ total() }}</span>
       </li>
     </ul>
 
@@ -37,6 +45,9 @@
       <button>Participar</button>
     </div>
   </div>
+  <p class="text-center helper">
+    Você ainda não será cobrado
+  </p>
 </template>
 <script>
 export default {
@@ -47,23 +58,45 @@ export default {
       assinatura: 30,
       snd: 15,
       fst: 0,
+      caucao: 15,
+      kotas: 1,
     };
   },
   methods: {
     formatPrice(value) {
       let val = (value / 1).toFixed(2).replace(".", ",");
-      return 'R$ ' + val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      return "R$ " + val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    },
+
+    total() {
+      const total = this.kotas * this.mensalidade + this.caucao;
+      return this.formatPrice(total);
+    },
+
+    decrease() {
+      if (this.kotas > 1) {
+        this.kotas -= 1;
+      }
+    },
+
+    increase() {
+      this.kotas += 1;
     },
   },
 };
 </script>
 
 <style scoped>
+
+@media screen and (max-width: 480px) {
+  .card {
+    border-radius: 0 !important;
+  }
+}
+
 .card {
-  border-radius: 10px;
   background-color: white;
   padding: 0;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
   /* width: 319px; */
 }
 
@@ -76,7 +109,7 @@ ul {
 
   -webkit-appearance: none;
   width: 100%;
-  height: 1px;
+  height: 2px;
   background: #01b1ec;
 }
 
@@ -128,7 +161,7 @@ li {
 }
 
 li span {
-  padding: 12px;
+  padding: 16px;
   font-size: 14px;
 }
 
@@ -149,7 +182,8 @@ li span:last-child {
   font-weight: 700;
 }
 
-.cols,.cols-label {
+.cols,
+.cols-label {
   display: flex;
   justify-content: space-between;
 }
@@ -168,5 +202,36 @@ li span:last-child {
 
 .cols p:last-child {
   color: #26b36a !important;
+}
+
+p.helper {
+  color: #616161;
+  font-weight: 300;
+  font-size: 10px;
+}
+
+.kotas button {
+  margin-left: 3px;
+  background-color: #01b1ec;
+  border-radius: 50%;
+  color: white;
+  width: 25px;
+  height: 25px;
+  border: 0;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.25s;
+}
+
+.kotas button:hover {
+  background-color: #0294c5;
+}
+
+.kotas button:focus {
+  outline: 3px solid #0294c596;
+}
+
+.kotas button .fas {
+  font-size: 12px;
 }
 </style>

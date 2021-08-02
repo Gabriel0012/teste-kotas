@@ -22,12 +22,24 @@ export default {
   /* color: #2c3e50; */
 }
 
+@media screen and (max-width: 480px) {
+  .card {
+    box-shadow: 0px 4px 20px rgba(225, 225, 225, 0.5);
+    border-radius: 10px;
+  }
+}
+
+@media screen and (min-width: 481px) {
+  .card {
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+  }
+}
+
 .card {
-  border-radius: 10px;
   background-color: white;
   text-align: center;
   padding: 10px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
   margin: 16px 0;
 }
 
@@ -39,5 +51,13 @@ export default {
 .cols,.cols-label {
   display: flex;
   justify-content: space-between;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
 }
 </style>
